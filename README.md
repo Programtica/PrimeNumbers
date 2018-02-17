@@ -1,1 +1,1 @@
-# PrimeNumbersQTPL
+# Prime-Numbers-QT-GUI
