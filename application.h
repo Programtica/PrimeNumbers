@@ -36,6 +36,9 @@ private:
     QVBoxLayout *vertical2;
     //QVBoxLayout *vertical3;
 
+    QHBoxLayout *horizontal;
+    QHBoxLayout *horizontal2;
+
     QHBoxLayout *labelHorizontal;
     QHBoxLayout *lineEditHorizontal;
 
@@ -46,7 +49,6 @@ private:
     QHBoxLayout *returnToMenuHorizontal;
 
     QHBoxLayout *buttonToConfirmHorizontal;
-    QHBoxLayout *horizontal2;
 
     QLabel *label;
     QLabel *label2;
@@ -72,7 +74,8 @@ private slots:
     void setATextOfPrime();
     void detectAClickOfSieve();
     void detectAClickOfDocumentation();
-    void setMenu();
+    void setLayoutsOfMenu();
+    void addLayoutsOfMenu();
     void setAMenuOfPrime();
 
 public:

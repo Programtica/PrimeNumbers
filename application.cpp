@@ -7,7 +7,7 @@ Application::Application(QWidget *parent)
 
     music = new Music();
     prime = new Prime();
-    setMenu();
+    setLayoutsOfMenu();
 }
 
 void Application::setPropertiesOfApplication() {
@@ -23,7 +23,7 @@ void Application::setPropertiesOfApplication() {
     setStyleSheet("QMainWindow{ background-image: url(:/img/paper.jpg)}");
 }
 
-void Application::setMenu() {
+void Application::setLayoutsOfMenu() {
     music->addFirstMusic();
     label = new QLabel(this);
     label->setText("Liczby pierwsze");
@@ -49,9 +49,17 @@ void Application::setMenu() {
     documentation->setStyleSheet("font-size: 20px;");
     documentation->setFixedSize(400, 65);
 
+    addLayoutsOfMenu();
+
+    connect(testPrime, SIGNAL(released()), this, SLOT(detectAClickOfTestOfPrime()));
+    connect(sieve, SIGNAL(released()), this, SLOT(detectAClickOfSieve()));
+    connect(documentation, SIGNAL(released()), this, SLOT(detectAClickOfDocumentation()));
+}
+
+void Application::addLayoutsOfMenu() {
     widget = new QWidget(this);
 
-    QHBoxLayout *horizontal = new QHBoxLayout();
+    horizontal = new QHBoxLayout();
     horizontal->addStretch();
 
     vertical = new QVBoxLayout();
@@ -76,42 +84,6 @@ void Application::setMenu() {
 
     setPropertiesOfApplication();
     setCentralWidget(widget);
-
-    connect(testPrime, SIGNAL(released()), this, SLOT(detectAClickOfTestOfPrime()));
-    connect(sieve, SIGNAL(released()), this, SLOT(detectAClickOfSieve()));
-    connect(documentation, SIGNAL(released()), this, SLOT(detectAClickOfDocumentation()));
-}
-
-void Application::setAMenuOfPrime() {
-    music->stopMusic();
-    music->addSecondMusic();
-
-    label->setText("Podaj liczbę: ");
-    label->setStyleSheet("font-size: 40px;");
-    label->setAlignment(Qt::AlignCenter);
-    label->adjustSize();
-
-    lineEdit = new QLineEdit(this);
-    lineEdit->setContextMenuPolicy(Qt::NoContextMenu);
-    lineEdit->setStyleSheet("border: 2px solid #0000ff; font-size: 40px;");
-    lineEdit->setAlignment(Qt::AlignCenter);
-
-    validator = new QIntValidator(this);
-    lineEdit->setValidator(validator);
-    lineEdit->adjustSize();
-
-    me = new QLabel(this);
-    QPixmap pixmap(":/img/calculator.jpg");
-    me->setPixmap(pixmap);
-    me->show();
-
-    buttonToConfirm = new QPushButton("Sprawdź", this);
-    buttonToConfirm->show();
-    buttonToConfirm->setCursor(Qt::PointingHandCursor);
-    buttonToConfirm->setStyleSheet("font-size: 20px;");
-    buttonToConfirm->setFixedSize(400, 65);
-
-    connect(buttonToConfirm, SIGNAL(pressed()), this, SLOT(setATextOfPrime()));
 }
 
 void Application::addLayoutsInTestOfPrime() {
@@ -188,6 +160,38 @@ void Application::setLayoutsInTestOfPrime() {
     buttonToConfirmHorizontal->addStretch();
 
     addLayoutsInTestOfPrime();
+}
+
+void Application::setAMenuOfPrime() {
+    music->stopMusic();
+    music->addSecondMusic();
+
+    label->setText("Podaj liczbę: ");
+    label->setStyleSheet("font-size: 40px;");
+    label->setAlignment(Qt::AlignCenter);
+    label->adjustSize();
+
+    lineEdit = new QLineEdit(this);
+    lineEdit->setContextMenuPolicy(Qt::NoContextMenu);
+    lineEdit->setStyleSheet("border: 2px solid #0000ff; font-size: 40px;");
+    lineEdit->setAlignment(Qt::AlignCenter);
+
+    validator = new QIntValidator(this);
+    lineEdit->setValidator(validator);
+    lineEdit->adjustSize();
+
+    me = new QLabel(this);
+    QPixmap pixmap(":/img/calculator.jpg");
+    me->setPixmap(pixmap);
+    me->show();
+
+    buttonToConfirm = new QPushButton("Sprawdź", this);
+    buttonToConfirm->show();
+    buttonToConfirm->setCursor(Qt::PointingHandCursor);
+    buttonToConfirm->setStyleSheet("font-size: 25px;");
+    buttonToConfirm->setFixedSize(400, 65);
+
+    connect(buttonToConfirm, SIGNAL(pressed()), this, SLOT(setATextOfPrime()));
 }
 
 void Application::detectAClickOfTestOfPrime() {
@@ -289,7 +293,7 @@ void Application::addButtonReturnToMenu() {
     returnToMenu->setText("Powrót do menu");
     returnToMenu->setStyleSheet("font-size: 25px");
     returnToMenu->setFixedSize(300, 75);
-    connect(returnToMenu, SIGNAL(released()), this, SLOT(setMenu()));
+    connect(returnToMenu, SIGNAL(released()), this, SLOT(setLayoutsOfMenu()));
 }
 
 void Application::closeEvent(QCloseEvent *event)
