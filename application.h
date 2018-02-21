@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QApplication>
+#include <QMessageBox>
+#include <QCloseEvent>
+#include <QAbstractButton>
 #include <QDesktopWidget>
 #include <QWidget>
 #include <QLabel>
@@ -26,30 +29,24 @@ private:
 
     QWidget *widget;
     QWidget *widgetTestOfPrime;
-    QWidget *widgetSieve;
-
-    QHBoxLayout *horizontal;
-    QHBoxLayout *horizontal2;
-    QHBoxLayout *horizontal3;
-    QHBoxLayout *pictureHorizontal;
-    QHBoxLayout *returnToMenuHorizontal;
+    //QWidget *widgetSieve;
 
     QVBoxLayout *vertical;
     QVBoxLayout *vertical2;
-    QVBoxLayout *vertical3;
+    //QVBoxLayout *vertical3;
 
     QLabel *label;
     QLabel *label2;
-    QLabel *label3;
-    QLabel *mePicture;
+    //QLabel *label3;
+    QLabel *me;
+    QLabel *yesOrNo;
 
     QLineEdit *lineEdit;
-    //QLineEdit *lineEdit2;
 
     QPushButton *testPrime;
     QPushButton *sieve;
     QPushButton *documentation;
-
+    QPushButton *buttonToConfirm;
     QPushButton *returnToMenu;
 
     Music *music;
@@ -59,11 +56,12 @@ private:
 
 private slots:
     void detectAClickOfTestOfPrime();
+    void setATextOfPrime();
     void detectAClickOfSieve();
     void detectAClickOfDocumentation();
-
-    void setAText();
     void setMenu();
+    void setAMenuOfPrime();
+
 public:
     Application(QWidget *parent = 0);
     ~Application();
@@ -71,6 +69,8 @@ public:
     bool isPrime(int number);
     void addButtonReturnToMenu();
     void setPropertiesOfApplication();
+    void setLayoutsInTestOfPrime();
+    void closeEvent(QCloseEvent *event);
 };
 
 #endif // APPLICATION_H

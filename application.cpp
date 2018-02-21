@@ -10,6 +10,19 @@ Application::Application(QWidget *parent)
     setMenu();
 }
 
+void Application::setPropertiesOfApplication() {
+    setWindowTitle("Liczby pierwsze");
+
+    setFixedSize(width, height);
+    desktop = QApplication::desktop();
+
+    int screenWidth = desktop->width();
+    int screenHeight = desktop->height();
+
+    move((screenWidth - width) / 2, (screenHeight - height) / 2);
+    setStyleSheet("QMainWindow{ background-image: url(:/img/paper.jpg)}");
+}
+
 void Application::setMenu() {
     music->addFirstMusic();
     label = new QLabel(this);
@@ -38,7 +51,7 @@ void Application::setMenu() {
 
     widget = new QWidget(this);
 
-    horizontal = new QHBoxLayout();
+    QHBoxLayout *horizontal = new QHBoxLayout();
     horizontal->addStretch();
 
     vertical = new QVBoxLayout();
@@ -69,27 +82,14 @@ void Application::setMenu() {
     connect(documentation, SIGNAL(released()), this, SLOT(detectAClickOfDocumentation()));
 }
 
-void Application::setPropertiesOfApplication() {
-    setWindowTitle("Liczby pierwsze");
-
-    setFixedSize(width, height);
-    desktop = QApplication::desktop();
-
-    int screenWidth = desktop->width();
-    int screenHeight = desktop->height();
-
-    move((screenWidth - width) / 2, (screenHeight - height) / 2);
-    setStyleSheet("QMainWindow{ background-image: url(:/img/paper.jpg)}");
-
-}
-
-void Application::detectAClickOfTestOfPrime() {
+void Application::setAMenuOfPrime() {
     music->stopMusic();
     music->addSecondMusic();
+
     label->setText("Podaj liczbę: ");
     label->setStyleSheet("font-size: 40px;");
     label->setAlignment(Qt::AlignCenter);
-    label->setFixedSize(400, 50);
+    label->adjustSize();
 
     lineEdit = new QLineEdit(this);
     lineEdit->setContextMenuPolicy(Qt::NoContextMenu);
@@ -98,57 +98,109 @@ void Application::detectAClickOfTestOfPrime() {
 
     validator = new QIntValidator(this);
     lineEdit->setValidator(validator);
-    lineEdit->setFixedSize(400, 50);
+    lineEdit->adjustSize();
 
-    label2 = new QLabel(this);
-    label2->setStyleSheet("font-size: 40px;");
-    label2->setAlignment(Qt::AlignCenter);
-    label2->setFixedSize(400, 50);
+    me = new QLabel(this);
+    QPixmap pixmap(":/img/calculator.jpg");
+    me->setPixmap(pixmap);
+    me->show();
 
-    mePicture = new QLabel(this);
+    buttonToConfirm = new QPushButton("Sprawdź", this);
+    buttonToConfirm->show();
+    buttonToConfirm->setCursor(Qt::PointingHandCursor);
+    buttonToConfirm->setStyleSheet("font-size: 20px;");
+    buttonToConfirm->setFixedSize(400, 65);
 
-    returnToMenu = new QPushButton(this);
+    connect(buttonToConfirm, SIGNAL(pressed()), this, SLOT(setATextOfPrime()));
+}
 
-    widgetTestOfPrime = new QWidget(this);
-
-    horizontal2 = new QHBoxLayout();
+void Application::setLayoutsInTestOfPrime() {
+    QHBoxLayout *horizontal2 = new QHBoxLayout();
     horizontal2->addStretch();
 
     vertical2 = new QVBoxLayout();
     vertical2->addStretch();
-    vertical2->addWidget(label);
-    vertical2->addSpacing(20);
 
-    vertical2->addWidget(lineEdit);
-    vertical2->addSpacing(20);
-    connect(lineEdit, SIGNAL(returnPressed()), this, SLOT(setAText()));
+    QHBoxLayout *labelHorizontal = new QHBoxLayout();
+    labelHorizontal->addStretch();
+    labelHorizontal->addWidget(label);
+    labelHorizontal->addStretch();
 
-    vertical2->addWidget(label2);
-    vertical2->addSpacing(10);
-    vertical2->addStretch();
+    QHBoxLayout *lineEditHorizontal = new QHBoxLayout();
+    lineEditHorizontal->addStretch();
+    lineEditHorizontal->addWidget(lineEdit);
+    lineEditHorizontal->addStretch();
 
-    pictureHorizontal = new QHBoxLayout();
+    QHBoxLayout *label2Horizontal = new QHBoxLayout();
+    label2Horizontal->addStretch();
+    label2Horizontal->addWidget(label2);
+    label2Horizontal->addStretch();
+
+    QHBoxLayout *meHorizontal = new QHBoxLayout();
+    meHorizontal->addStretch();
+    meHorizontal->addWidget(me);
+    meHorizontal->addStretch();
+
+    QHBoxLayout *pictureHorizontal = new QHBoxLayout();
     pictureHorizontal->addStretch();
-    pictureHorizontal->addWidget(mePicture);
+    pictureHorizontal->addWidget(yesOrNo);
     pictureHorizontal->addStretch();
 
-    returnToMenuHorizontal = new QHBoxLayout();
+    QHBoxLayout *returnToMenuHorizontal = new QHBoxLayout();
     returnToMenuHorizontal->addStretch();
     returnToMenuHorizontal->addWidget(returnToMenu);
     returnToMenuHorizontal->addStretch();
 
+    QHBoxLayout *buttonToConfirmHorizontal = new QHBoxLayout();
+    buttonToConfirmHorizontal->addStretch();
+    buttonToConfirmHorizontal->addWidget(buttonToConfirm);
+    buttonToConfirmHorizontal->addStretch();
+
+    vertical2->addLayout(labelHorizontal);
+    vertical2->addStretch();
+    vertical2->addSpacing(10);
+
+    vertical2->addLayout(lineEditHorizontal);
+    vertical2->addStretch();
+
+    vertical2->addLayout(label2Horizontal);
+    vertical2->addStretch();
+    vertical2->addSpacing(-20);
+
+    vertical2->addLayout(meHorizontal);
+    vertical2->addStretch();
+
     vertical2->addLayout(pictureHorizontal);
     vertical2->addStretch();
-    vertical2->addSpacing(30);
 
     vertical2->addLayout(returnToMenuHorizontal);
     vertical2->addStretch();
 
+    vertical2->addLayout(buttonToConfirmHorizontal);
+    vertical2->addStretch();
+
     horizontal2->addLayout(vertical2);
     horizontal2->addStretch();
-
     widgetTestOfPrime->setLayout(horizontal2);
+
     setCentralWidget(widgetTestOfPrime);
+}
+
+void Application::detectAClickOfTestOfPrime() {
+    setAMenuOfPrime();
+
+    connect(lineEdit, SIGNAL(returnPressed()), this, SLOT(setATextOfPrime()));
+
+    label2 = new QLabel(this);
+    label2->setStyleSheet("font-size: 40px;");
+    label2->setAlignment(Qt::AlignCenter);
+    label2->setFixedSize(600, 50);
+
+    yesOrNo = new QLabel(this);
+    returnToMenu = new QPushButton(this);
+    widgetTestOfPrime = new QWidget(this);
+
+    setLayoutsInTestOfPrime();
 
     testPrime->hide();
     sieve->hide();
@@ -157,7 +209,8 @@ void Application::detectAClickOfTestOfPrime() {
 }
 
 void Application::detectAClickOfSieve() {
-    //to be continued
+    sieve->setText("Jeszcze nie zrobione!");
+    /*to be continued
     music->stopMusic();
 
     label3 = new QLabel(this);
@@ -166,14 +219,14 @@ void Application::detectAClickOfSieve() {
     label3->setAlignment(Qt::AlignCenter);
     label3->setFixedSize(400, 50);
 
-    //lineEdit2 = new QLineEdit(this);
-    //lineEdit2->setContextMenuPolicy(Qt::NoContextMenu);
-    //lineEdit2->setStyleSheet("border: 2px solid #0000ff; font-size: 40px;");
-    //lineEdit2->setAlignment(Qt::AlignCenter);
+    lineEdit2 = new QLineEdit(this);
+    lineEdit2->setContextMenuPolicy(Qt::NoContextMenu);
+    lineEdit2->setStyleSheet("border: 2px solid #0000ff; font-size: 40px;");
+    lineEdit2->setAlignment(Qt::AlignCenter);
 
-    //validator = new QIntValidator(this);
-    //lineEdit2->setValidator(validator);
-    //lineEdit2->setFixedSize(400, 50);
+    validator = new QIntValidator(this);
+    lineEdit2->setValidator(validator);
+    lineEdit2->setFixedSize(400, 50);
 
     vertical3 = new QVBoxLayout();
     vertical3->addStretch();
@@ -182,18 +235,18 @@ void Application::detectAClickOfSieve() {
 
     widgetSieve = new QWidget(this);
 
-    //vertical3->addWidget(lineEdit2);
+    vertical3->addWidget(lineEdit2);
     vertical3->addSpacing(20);
-    //connect(lineEdit2, SIGNAL(returnPressed()), this, SLOT(setAText()));
+    connect(lineEdit2, SIGNAL(returnPressed()), this, SLOT(setAText()));
 
-    horizontal3 = new QHBoxLayout();
+    QHBoxLayout *horizontal3 = new QHBoxLayout();
     horizontal3->addStretch();
 
     horizontal3->addLayout(vertical3);
     horizontal3->addStretch();
 
     widgetSieve->setLayout(horizontal3);
-    setCentralWidget(widgetSieve);
+    setCentralWidget(widgetSieve);*/
 }
 
 void Application::detectAClickOfDocumentation() {
@@ -201,26 +254,26 @@ void Application::detectAClickOfDocumentation() {
     documentation->setText("Jeszcze nie zrobione!");
 }
 
-void Application::setAText() {
-    QString numberFromInput = lineEdit->text();
+void Application::setATextOfPrime() {
+    buttonToConfirm->hide();
+    me->hide();
 
-    bool ok;
+    bool ok = true;
+    QString numberFromInput = lineEdit->text();
     int number = numberFromInput.toInt(&ok, 10);
+    QString textOfNumber = QString::number(number);
 
     if(prime->isPrime(number) == true) {
-        label2->setText("Czy jest pierwsza: TAK");
+        label2->setText("Czy " + textOfNumber + " jest pierwsza: TAK");
         QPixmap pixmap(":/img/me_yes.png");
-        mePicture->setPixmap(pixmap);
-    }
-
-    else {
-        label2->setText("Czy jest pierwsza: NIE");
+        yesOrNo->setPixmap(pixmap);
+    } else {
+        label2->setText("Czy " + textOfNumber + " jest pierwsza: NIE");
         QPixmap pixmap(":/img/me_no.png");
-        mePicture->setPixmap(pixmap);
+        yesOrNo->setPixmap(pixmap);
     }
 
-
-    mePicture->setStyleSheet("background-image: url(:/img/white.jpg); "
+    yesOrNo->setStyleSheet("background-image: url(:/img/white.jpg); "
                              "border: 2px solid #000; border-radius: 5px;");
 
     addButtonReturnToMenu();
@@ -233,6 +286,23 @@ void Application::addButtonReturnToMenu() {
     returnToMenu->setStyleSheet("font-size: 25px");
     returnToMenu->setFixedSize(300, 75);
     connect(returnToMenu, SIGNAL(released()), this, SLOT(setMenu()));
+}
+
+void Application::closeEvent(QCloseEvent *event)
+{
+    QMessageBox exitMessage;
+    exitMessage.setWindowTitle("Liczby pierwsze");
+    exitMessage.setIcon(QMessageBox::Question);
+    exitMessage.setText(tr("Koniec pracy na dziś. \nCzy chcesz zakończyć program?"));
+    QAbstractButton *yesButton = exitMessage.addButton(tr("Tak"), QMessageBox::YesRole);
+    exitMessage.addButton(tr("Nie"), QMessageBox::NoRole);
+    exitMessage.exec();
+
+    if (exitMessage.clickedButton()==yesButton) {
+        event->accept();
+    } else {
+        event->ignore();
+    }
 }
 
 Application::~Application() {
