@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QLineEdit>
 #include <QValidator>
 #include <QIntValidator>
@@ -34,6 +35,18 @@ private:
     QVBoxLayout *vertical;
     QVBoxLayout *vertical2;
     //QVBoxLayout *vertical3;
+
+    QHBoxLayout *labelHorizontal;
+    QHBoxLayout *lineEditHorizontal;
+
+    QHBoxLayout *label2Horizontal;
+    QHBoxLayout *meHorizontal;
+
+    QHBoxLayout *pictureHorizontal;
+    QHBoxLayout *returnToMenuHorizontal;
+
+    QHBoxLayout *buttonToConfirmHorizontal;
+    QHBoxLayout *horizontal2;
 
     QLabel *label;
     QLabel *label2;
@@ -70,6 +83,7 @@ public:
     void addButtonReturnToMenu();
     void setPropertiesOfApplication();
     void setLayoutsInTestOfPrime();
+    void addLayoutsInTestOfPrime();
     void closeEvent(QCloseEvent *event);
 };
 

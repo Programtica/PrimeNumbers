@@ -114,48 +114,7 @@ void Application::setAMenuOfPrime() {
     connect(buttonToConfirm, SIGNAL(pressed()), this, SLOT(setATextOfPrime()));
 }
 
-void Application::setLayoutsInTestOfPrime() {
-    QHBoxLayout *horizontal2 = new QHBoxLayout();
-    horizontal2->addStretch();
-
-    vertical2 = new QVBoxLayout();
-    vertical2->addStretch();
-
-    QHBoxLayout *labelHorizontal = new QHBoxLayout();
-    labelHorizontal->addStretch();
-    labelHorizontal->addWidget(label);
-    labelHorizontal->addStretch();
-
-    QHBoxLayout *lineEditHorizontal = new QHBoxLayout();
-    lineEditHorizontal->addStretch();
-    lineEditHorizontal->addWidget(lineEdit);
-    lineEditHorizontal->addStretch();
-
-    QHBoxLayout *label2Horizontal = new QHBoxLayout();
-    label2Horizontal->addStretch();
-    label2Horizontal->addWidget(label2);
-    label2Horizontal->addStretch();
-
-    QHBoxLayout *meHorizontal = new QHBoxLayout();
-    meHorizontal->addStretch();
-    meHorizontal->addWidget(me);
-    meHorizontal->addStretch();
-
-    QHBoxLayout *pictureHorizontal = new QHBoxLayout();
-    pictureHorizontal->addStretch();
-    pictureHorizontal->addWidget(yesOrNo);
-    pictureHorizontal->addStretch();
-
-    QHBoxLayout *returnToMenuHorizontal = new QHBoxLayout();
-    returnToMenuHorizontal->addStretch();
-    returnToMenuHorizontal->addWidget(returnToMenu);
-    returnToMenuHorizontal->addStretch();
-
-    QHBoxLayout *buttonToConfirmHorizontal = new QHBoxLayout();
-    buttonToConfirmHorizontal->addStretch();
-    buttonToConfirmHorizontal->addWidget(buttonToConfirm);
-    buttonToConfirmHorizontal->addStretch();
-
+void Application::addLayoutsInTestOfPrime() {
     vertical2->addLayout(labelHorizontal);
     vertical2->addStretch();
     vertical2->addSpacing(10);
@@ -184,6 +143,51 @@ void Application::setLayoutsInTestOfPrime() {
     widgetTestOfPrime->setLayout(horizontal2);
 
     setCentralWidget(widgetTestOfPrime);
+}
+
+void Application::setLayoutsInTestOfPrime() {
+    horizontal2 = new QHBoxLayout();
+    horizontal2->addStretch();
+
+    vertical2 = new QVBoxLayout();
+    vertical2->addStretch();
+
+    labelHorizontal = new QHBoxLayout();
+    labelHorizontal->addStretch();
+    labelHorizontal->addWidget(label);
+    labelHorizontal->addStretch();
+
+    lineEditHorizontal = new QHBoxLayout();
+    lineEditHorizontal->addStretch();
+    lineEditHorizontal->addWidget(lineEdit);
+    lineEditHorizontal->addStretch();
+
+    label2Horizontal = new QHBoxLayout();
+    label2Horizontal->addStretch();
+    label2Horizontal->addWidget(label2);
+    label2Horizontal->addStretch();
+
+    meHorizontal = new QHBoxLayout();
+    meHorizontal->addStretch();
+    meHorizontal->addWidget(me);
+    meHorizontal->addStretch();
+
+    pictureHorizontal = new QHBoxLayout();
+    pictureHorizontal->addStretch();
+    pictureHorizontal->addWidget(yesOrNo);
+    pictureHorizontal->addStretch();
+
+    returnToMenuHorizontal = new QHBoxLayout();
+    returnToMenuHorizontal->addStretch();
+    returnToMenuHorizontal->addWidget(returnToMenu);
+    returnToMenuHorizontal->addStretch();
+
+    buttonToConfirmHorizontal = new QHBoxLayout();
+    buttonToConfirmHorizontal->addStretch();
+    buttonToConfirmHorizontal->addWidget(buttonToConfirm);
+    buttonToConfirmHorizontal->addStretch();
+
+    addLayoutsInTestOfPrime();
 }
 
 void Application::detectAClickOfTestOfPrime() {
