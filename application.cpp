@@ -7,7 +7,7 @@ Application::Application(QWidget *parent)
 
     music = new Music();
     prime = new Prime();
-    setLayoutsOfMenu();
+    setLayoutsOfMainMenu();
 }
 
 void Application::setPropertiesOfApplication() {
@@ -23,7 +23,7 @@ void Application::setPropertiesOfApplication() {
     setStyleSheet("QMainWindow{ background-image: url(:/img/paper.jpg)}");
 }
 
-void Application::setLayoutsOfMenu() {
+void Application::setLayoutsOfMainMenu() {
     music->addFirstMusic();
     music->startMusic();
 
@@ -44,14 +44,14 @@ void Application::setLayoutsOfMenu() {
     buttonsInMainMenu[1]->setText("Sito Eratostenesa");
     buttonsInMainMenu[2]->setText("Pomoc i dokumentacja");
 
-    addLayoutsOfMenu();
+    addLayoutsOfMainMenu();
 
     connect(buttonsInMainMenu[0], SIGNAL(released()), this, SLOT(detectAClickOfTestOfPrime()));
     connect(buttonsInMainMenu[1], SIGNAL(released()), this, SLOT(detectAClickOfSieve()));
     connect(buttonsInMainMenu[2], SIGNAL(released()), this, SLOT(detectAClickOfDocumentation()));
 }
 
-void Application::addLayoutsOfMenu() {
+void Application::addLayoutsOfMainMenu() {
     widget = new QWidget(this);
 
     horizontal = new QHBoxLayout();
@@ -79,7 +79,7 @@ void Application::addLayoutsOfMenu() {
 
 void Application::addLayoutsInTestOfPrime() {
     for(int i=0; i<7; i++) {
-        vertical2->addLayout(horizontals[i]);
+        vertical2->addLayout(horizontalsObjects[i]);
         vertical2->addStretch();
 
         if(i==0) {
@@ -104,20 +104,20 @@ void Application::setLayoutsInTestOfPrime() {
     vertical2->addStretch();
 
     for(int i=0; i<7; i++) {
-        horizontals[i] = new QHBoxLayout();
-        horizontals[i]->addStretch();
+        horizontalsObjects[i] = new QHBoxLayout();
+        horizontalsObjects[i]->addStretch();
     }
 
-    horizontals[0]->addWidget(label);
-    horizontals[1]->addWidget(lineEdit);
-    horizontals[2]->addWidget(label2);
-    horizontals[3]->addWidget(me);
-    horizontals[4]->addWidget(yesOrNo);
-    horizontals[5]->addWidget(returnToMenu);
-    horizontals[6]->addWidget(buttonToConfirm);
+    horizontalsObjects[0]->addWidget(label);
+    horizontalsObjects[1]->addWidget(lineEdit);
+    horizontalsObjects[2]->addWidget(label2);
+    horizontalsObjects[3]->addWidget(me);
+    horizontalsObjects[4]->addWidget(yesOrNo);
+    horizontalsObjects[5]->addWidget(returnToMenu);
+    horizontalsObjects[6]->addWidget(buttonToConfirm);
 
     for(int i=0; i<7; i++) {
-        horizontals[i]->addStretch();
+        horizontalsObjects[i]->addStretch();
     }
 
     addLayoutsInTestOfPrime();
@@ -156,6 +156,18 @@ void Application::setAMenuOfPrime() {
     connect(buttonToConfirm, SIGNAL(pressed()), this, SLOT(setATextOfPrime()));
 }
 
+void Application::setAMenuOfSieve() {
+    music->stopMusic();
+    music->addThirdMusic();
+    music->startMusic();
+}
+
+void Application::setAMenuOfDocumentation() {
+    music->stopMusic();
+    music->addFourthMusic();
+    music->startMusic();
+}
+
 void Application::detectAClickOfTestOfPrime() {
     setAMenuOfPrime();
 
@@ -180,13 +192,18 @@ void Application::detectAClickOfTestOfPrime() {
 }
 
 void Application::detectAClickOfSieve() {
-    //to be continued
-    buttonsInMainMenu[1]->setText("Jeszcze nie zrobione!");
+    //to be continued - in preparation
+    buttonsInMainMenu[1]->setText("Tylko muzyka dodana!");
+    buttonsInMainMenu[2]->setText("Pomoc i dokumentacja");
+    setAMenuOfSieve();
 }
 
 void Application::detectAClickOfDocumentation() {
-    //to be continued
-    buttonsInMainMenu[2]->setText("Jeszcze nie zrobione!");
+    //to be continued - in preparation
+    buttonsInMainMenu[1]->setText("Sito Eratostenesa");
+    buttonsInMainMenu[2]->setText("Tylko muzyka dodana!");
+
+    setAMenuOfDocumentation();
 }
 
 void Application::setATextOfPrime() {
@@ -209,8 +226,7 @@ void Application::setATextOfPrime() {
     }
 
     yesOrNo->setStyleSheet("background-image: url(:/img/white.jpg); "
-                             "border: 2px solid #000; border-radius: 5px;");
-
+                           "border: 2px solid #000; border-radius: 5px;");
     addButtonReturnToMenu();
 }
 
@@ -220,7 +236,7 @@ void Application::addButtonReturnToMenu() {
     returnToMenu->setText("Powrót do menu");
     returnToMenu->setStyleSheet("font-size: 25px");
     returnToMenu->setFixedSize(300, 75);
-    connect(returnToMenu, SIGNAL(released()), this, SLOT(setLayoutsOfMenu()));
+    connect(returnToMenu, SIGNAL(released()), this, SLOT(setLayoutsOfMainMenu()));
 }
 
 void Application::closeEvent(QCloseEvent *event)

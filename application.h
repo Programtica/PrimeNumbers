@@ -31,6 +31,7 @@ private:
     QWidget *widget;
     QWidget *widgetTestOfPrime;
     //QWidget *widgetSieve;
+    //QWidget *widgetDocumentation;
 
     QVBoxLayout *vertical;
     QVBoxLayout *vertical2;
@@ -38,7 +39,7 @@ private:
     QHBoxLayout *horizontal;
     QHBoxLayout *horizontal2;
 
-    QHBoxLayout *horizontals[7];
+    QHBoxLayout *horizontalsObjects[7];
 
     QLabel *label;
     QLabel *label2;
@@ -60,9 +61,11 @@ private slots:
     void setATextOfPrime();
     void detectAClickOfSieve();
     void detectAClickOfDocumentation();
-    void setLayoutsOfMenu();
-    void addLayoutsOfMenu();
+    void setLayoutsOfMainMenu();
+    void addLayoutsOfMainMenu();
     void setAMenuOfPrime();
+    void setAMenuOfSieve();
+    void setAMenuOfDocumentation();
 
 public:
     Application(QWidget *parent = 0);

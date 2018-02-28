@@ -3,20 +3,40 @@
 Music::Music() {
     //constructor
     player = new QMediaPlayer();
-    playlist = new QMediaPlaylist();
-    playlist2 = new QMediaPlaylist();
+    for(int i=0; i<4; i++) {
+        playlists[i] = nullptr;
+    }
 }
 
 void Music::addFirstMusic() {
-    playlist->addMedia(QUrl("qrc:/snd/chicken.mp3"));
-    playlist->setPlaybackMode(QMediaPlaylist::Loop);
-    player->setPlaylist(playlist);
+    playlists[0] = new QMediaPlaylist();
+    playlists[0]->addMedia(QUrl("qrc:/snd/ifIHadAChicken.mp3"));
+    playlists[0]->setPlaybackMode(QMediaPlaylist::Loop);
+    player->setPlaylist(playlists[0]);
 }
 
 void Music::addSecondMusic() {
-    playlist2->addMedia(QUrl("qrc:/snd/brightlyFancyOddities.mp3"));
-    playlist2->setPlaybackMode(QMediaPlaylist::Loop);
-    player->setPlaylist(playlist2);
+    playlists[1] = new QMediaPlaylist();
+    playlists[1]->addMedia(QUrl("qrc:/snd/brightlyFancyOddities.mp3"));
+    playlists[1]->setPlaybackMode(QMediaPlaylist::Loop);
+    player->setPlaylist(playlists[1]);
+}
+
+void Music::addThirdMusic() {
+    playlists[2] = new QMediaPlaylist();
+    playlists[2]->addMedia(QUrl("qrc:/snd/battyMcFaddinSilentFilmLight.mp3"));
+    playlists[2]->setPlaybackMode(QMediaPlaylist::Loop);
+    player->setPlaylist(playlists[2]);
+}
+
+void Music::addFourthMusic() {
+    playlists[3] = new QMediaPlaylist();
+    playlists[3]->addMedia(QUrl("qrc:/snd/amazingPlanSilentFilmDark.mp3"));
+    playlists[3]->addMedia(QUrl("qrc:/snd/ifIHadAChicken.mp3"));
+    playlists[3]->addMedia(QUrl("qrc:/snd/battyMcFaddinSilentFilmLight.mp3"));
+    playlists[3]->addMedia(QUrl("qrc:/snd/brightlyFancyOddities.mp3"));
+    playlists[3]->setPlaybackMode(QMediaPlaylist::Loop);
+    player->setPlaylist(playlists[3]);
 }
 
 void Music::startMusic() {

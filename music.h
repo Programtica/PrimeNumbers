@@ -7,15 +7,15 @@
 class Music {
 private:
     QMediaPlayer *player;
-
-    QMediaPlaylist *playlist;
-    QMediaPlaylist *playlist2;
+    QMediaPlaylist *playlists[4];
 public:
     Music();
     ~Music();
 
     void addFirstMusic();
     void addSecondMusic();
+    void addThirdMusic();
+    void addFourthMusic();
     void startMusic();
     void stopMusic();
 };
