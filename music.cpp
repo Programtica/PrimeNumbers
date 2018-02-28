@@ -8,20 +8,18 @@ Music::Music() {
 }
 
 void Music::addFirstMusic() {
-    playlist = new QMediaPlaylist();
-    playlist->addMedia(QUrl("qrc:/snd/chicken.ogg"));
+    playlist->addMedia(QUrl("qrc:/snd/chicken.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
-
     player->setPlaylist(playlist);
-    player->setVolume(40);
-    player->play();
 }
 
 void Music::addSecondMusic() {
-    playlist2->addMedia(QUrl("qrc:/snd/brightlyFancyOddities.ogg"));
+    playlist2->addMedia(QUrl("qrc:/snd/brightlyFancyOddities.mp3"));
     playlist2->setPlaybackMode(QMediaPlaylist::Loop);
-
     player->setPlaylist(playlist2);
+}
+
+void Music::startMusic() {
     player->setVolume(40);
     player->play();
 }

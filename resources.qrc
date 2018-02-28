@@ -2,11 +2,11 @@
     <qresource prefix="/">
         <file>img/paper.jpg</file>
         <file>img/white.jpg</file>
-        <file>snd/chicken.ogg</file>
-        <file>snd/brightlyFancyOddities.ogg</file>
         <file>img/me_yes.png</file>
         <file>img/me_no.png</file>
         <file>img/icon/favicon-0.png</file>
         <file>img/calculator.jpg</file>
+        <file>snd/brightlyFancyOddities.mp3</file>
+        <file>snd/chicken.mp3</file>
     </qresource>
 </RCC>

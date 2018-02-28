@@ -39,16 +39,7 @@ private:
     QHBoxLayout *horizontal;
     QHBoxLayout *horizontal2;
 
-    QHBoxLayout *labelHorizontal;
-    QHBoxLayout *lineEditHorizontal;
-
-    QHBoxLayout *label2Horizontal;
-    QHBoxLayout *meHorizontal;
-
-    QHBoxLayout *pictureHorizontal;
-    QHBoxLayout *returnToMenuHorizontal;
-
-    QHBoxLayout *buttonToConfirmHorizontal;
+    QHBoxLayout *horizontals[7];
 
     QLabel *label;
     QLabel *label2;
@@ -58,9 +49,7 @@ private:
 
     QLineEdit *lineEdit;
 
-    QPushButton *testPrime;
-    QPushButton *sieve;
-    QPushButton *documentation;
+    QPushButton *buttonsInMainMenu[3];
     QPushButton *buttonToConfirm;
     QPushButton *returnToMenu;
 

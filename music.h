@@ -16,6 +16,7 @@ public:
 
     void addFirstMusic();
     void addSecondMusic();
+    void startMusic();
     void stopMusic();
 };
 

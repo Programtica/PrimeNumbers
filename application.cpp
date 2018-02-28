@@ -25,35 +25,30 @@ void Application::setPropertiesOfApplication() {
 
 void Application::setLayoutsOfMenu() {
     music->addFirstMusic();
+    music->startMusic();
+
     label = new QLabel(this);
     label->setText("Liczby pierwsze");
     label->setStyleSheet("font-size: 40px;");
     label->setAlignment(Qt::AlignCenter);
     label->setFixedSize(400, 50);
 
-    testPrime = new QPushButton(this);
-    testPrime->setCursor(Qt::PointingHandCursor);
-    testPrime->setText("Test pierwszości");
-    testPrime->setStyleSheet("font-size: 20px;");
-    testPrime->setFixedSize(400, 65);
+    for(int i=0; i<3; i++) {
+        buttonsInMainMenu[i] = new QPushButton(this);
+        buttonsInMainMenu[i]->setCursor(Qt::PointingHandCursor);
+        buttonsInMainMenu[i]->setStyleSheet("font-size: 20px;");
+        buttonsInMainMenu[i]->setFixedSize(400, 65);
+    }
 
-    sieve = new QPushButton(this);
-    sieve->setCursor(Qt::PointingHandCursor);
-    sieve->setText("Sito Eratostenesa");
-    sieve->setStyleSheet("font-size: 20px;");
-    sieve->setFixedSize(400, 65);
-
-    documentation = new QPushButton(this);
-    documentation->setCursor(Qt::PointingHandCursor);
-    documentation->setText("Pomoc i dokumentacja");
-    documentation->setStyleSheet("font-size: 20px;");
-    documentation->setFixedSize(400, 65);
+    buttonsInMainMenu[0]->setText("Test pierwszości");
+    buttonsInMainMenu[1]->setText("Sito Eratostenesa");
+    buttonsInMainMenu[2]->setText("Pomoc i dokumentacja");
 
     addLayoutsOfMenu();
 
-    connect(testPrime, SIGNAL(released()), this, SLOT(detectAClickOfTestOfPrime()));
-    connect(sieve, SIGNAL(released()), this, SLOT(detectAClickOfSieve()));
-    connect(documentation, SIGNAL(released()), this, SLOT(detectAClickOfDocumentation()));
+    connect(buttonsInMainMenu[0], SIGNAL(released()), this, SLOT(detectAClickOfTestOfPrime()));
+    connect(buttonsInMainMenu[1], SIGNAL(released()), this, SLOT(detectAClickOfSieve()));
+    connect(buttonsInMainMenu[2], SIGNAL(released()), this, SLOT(detectAClickOfDocumentation()));
 }
 
 void Application::addLayoutsOfMenu() {
@@ -67,14 +62,10 @@ void Application::addLayoutsOfMenu() {
     vertical->addWidget(label);
     vertical->addSpacing(40);
 
-    vertical->addWidget(testPrime);
-    vertical->addSpacing(20);
-
-    vertical->addWidget(sieve);
-    vertical->addSpacing(20);
-
-    vertical->addWidget(documentation);
-    vertical->addSpacing(20);
+    for(int i=0; i<3; i++) {
+        vertical->addWidget(buttonsInMainMenu[i]);
+        vertical->addSpacing(20);
+    }
 
     vertical->addStretch();
     horizontal->addLayout(vertical);
@@ -87,28 +78,16 @@ void Application::addLayoutsOfMenu() {
 }
 
 void Application::addLayoutsInTestOfPrime() {
-    vertical2->addLayout(labelHorizontal);
-    vertical2->addStretch();
-    vertical2->addSpacing(10);
+    for(int i=0; i<7; i++) {
+        vertical2->addLayout(horizontals[i]);
+        vertical2->addStretch();
 
-    vertical2->addLayout(lineEditHorizontal);
-    vertical2->addStretch();
-
-    vertical2->addLayout(label2Horizontal);
-    vertical2->addStretch();
-    vertical2->addSpacing(-20);
-
-    vertical2->addLayout(meHorizontal);
-    vertical2->addStretch();
-
-    vertical2->addLayout(pictureHorizontal);
-    vertical2->addStretch();
-
-    vertical2->addLayout(returnToMenuHorizontal);
-    vertical2->addStretch();
-
-    vertical2->addLayout(buttonToConfirmHorizontal);
-    vertical2->addStretch();
+        if(i==0) {
+            vertical2->addSpacing(10);
+        } else if(i==2) {
+            vertical2->addSpacing(-20);
+        }
+    }
 
     horizontal2->addLayout(vertical2);
     horizontal2->addStretch();
@@ -124,40 +103,22 @@ void Application::setLayoutsInTestOfPrime() {
     vertical2 = new QVBoxLayout();
     vertical2->addStretch();
 
-    labelHorizontal = new QHBoxLayout();
-    labelHorizontal->addStretch();
-    labelHorizontal->addWidget(label);
-    labelHorizontal->addStretch();
+    for(int i=0; i<7; i++) {
+        horizontals[i] = new QHBoxLayout();
+        horizontals[i]->addStretch();
+    }
 
-    lineEditHorizontal = new QHBoxLayout();
-    lineEditHorizontal->addStretch();
-    lineEditHorizontal->addWidget(lineEdit);
-    lineEditHorizontal->addStretch();
+    horizontals[0]->addWidget(label);
+    horizontals[1]->addWidget(lineEdit);
+    horizontals[2]->addWidget(label2);
+    horizontals[3]->addWidget(me);
+    horizontals[4]->addWidget(yesOrNo);
+    horizontals[5]->addWidget(returnToMenu);
+    horizontals[6]->addWidget(buttonToConfirm);
 
-    label2Horizontal = new QHBoxLayout();
-    label2Horizontal->addStretch();
-    label2Horizontal->addWidget(label2);
-    label2Horizontal->addStretch();
-
-    meHorizontal = new QHBoxLayout();
-    meHorizontal->addStretch();
-    meHorizontal->addWidget(me);
-    meHorizontal->addStretch();
-
-    pictureHorizontal = new QHBoxLayout();
-    pictureHorizontal->addStretch();
-    pictureHorizontal->addWidget(yesOrNo);
-    pictureHorizontal->addStretch();
-
-    returnToMenuHorizontal = new QHBoxLayout();
-    returnToMenuHorizontal->addStretch();
-    returnToMenuHorizontal->addWidget(returnToMenu);
-    returnToMenuHorizontal->addStretch();
-
-    buttonToConfirmHorizontal = new QHBoxLayout();
-    buttonToConfirmHorizontal->addStretch();
-    buttonToConfirmHorizontal->addWidget(buttonToConfirm);
-    buttonToConfirmHorizontal->addStretch();
+    for(int i=0; i<7; i++) {
+        horizontals[i]->addStretch();
+    }
 
     addLayoutsInTestOfPrime();
 }
@@ -165,6 +126,7 @@ void Application::setLayoutsInTestOfPrime() {
 void Application::setAMenuOfPrime() {
     music->stopMusic();
     music->addSecondMusic();
+    music->startMusic();
 
     label->setText("Podaj liczbę: ");
     label->setStyleSheet("font-size: 40px;");
@@ -210,56 +172,21 @@ void Application::detectAClickOfTestOfPrime() {
 
     setLayoutsInTestOfPrime();
 
-    testPrime->hide();
-    sieve->hide();
-    documentation->hide();
+    for(int i=0; i<3; i++) {
+        buttonsInMainMenu[i]->hide();
+    }
+
     returnToMenu->hide();
 }
 
 void Application::detectAClickOfSieve() {
-    sieve->setText("Jeszcze nie zrobione!");
-    /*to be continued
-    music->stopMusic();
-
-    label3 = new QLabel(this);
-    label3->setText("W przygotowaniu!");
-    label3->setStyleSheet("font-size: 40px;");
-    label3->setAlignment(Qt::AlignCenter);
-    label3->setFixedSize(400, 50);
-
-    lineEdit2 = new QLineEdit(this);
-    lineEdit2->setContextMenuPolicy(Qt::NoContextMenu);
-    lineEdit2->setStyleSheet("border: 2px solid #0000ff; font-size: 40px;");
-    lineEdit2->setAlignment(Qt::AlignCenter);
-
-    validator = new QIntValidator(this);
-    lineEdit2->setValidator(validator);
-    lineEdit2->setFixedSize(400, 50);
-
-    vertical3 = new QVBoxLayout();
-    vertical3->addStretch();
-    vertical3->addWidget(label3);
-    vertical3->addSpacing(420);
-
-    widgetSieve = new QWidget(this);
-
-    vertical3->addWidget(lineEdit2);
-    vertical3->addSpacing(20);
-    connect(lineEdit2, SIGNAL(returnPressed()), this, SLOT(setAText()));
-
-    QHBoxLayout *horizontal3 = new QHBoxLayout();
-    horizontal3->addStretch();
-
-    horizontal3->addLayout(vertical3);
-    horizontal3->addStretch();
-
-    widgetSieve->setLayout(horizontal3);
-    setCentralWidget(widgetSieve);*/
+    //to be continued
+    buttonsInMainMenu[1]->setText("Jeszcze nie zrobione!");
 }
 
 void Application::detectAClickOfDocumentation() {
     //to be continued
-    documentation->setText("Jeszcze nie zrobione!");
+    buttonsInMainMenu[2]->setText("Jeszcze nie zrobione!");
 }
 
 void Application::setATextOfPrime() {
@@ -307,6 +234,7 @@ void Application::closeEvent(QCloseEvent *event)
     exitMessage.exec();
 
     if (exitMessage.clickedButton()==yesButton) {
+        music->stopMusic();
         event->accept();
     } else {
         event->ignore();
