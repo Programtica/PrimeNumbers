@@ -34,7 +34,6 @@ private:
 
     QVBoxLayout *vertical;
     QVBoxLayout *vertical2;
-    //QVBoxLayout *vertical3;
 
     QHBoxLayout *horizontal;
     QHBoxLayout *horizontal2;
@@ -43,10 +42,8 @@ private:
 
     QLabel *label;
     QLabel *label2;
-    //QLabel *label3;
     QLabel *me;
     QLabel *yesOrNo;
-
     QLineEdit *lineEdit;
 
     QPushButton *buttonsInMainMenu[3];
