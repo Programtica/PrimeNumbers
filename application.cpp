@@ -202,7 +202,6 @@ void Application::detectAClickOfDocumentation() {
     //to be continued - in preparation
     buttonsInMainMenu[1]->setText("Sito Eratostenesa");
     buttonsInMainMenu[2]->setText("Tylko muzyka dodana!");
-
     setAMenuOfDocumentation();
 }
 
