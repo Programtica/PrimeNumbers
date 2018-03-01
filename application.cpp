@@ -68,6 +68,9 @@ void Application::addLayoutsOfMainMenu() {
     }
 
     vertical->addStretch();
+
+    info = new QLabel(this);
+
     horizontal->addLayout(vertical);
     horizontal->addStretch();
 
@@ -162,10 +165,33 @@ void Application::setAMenuOfSieve() {
     music->startMusic();
 }
 
+bool Application::pdfFileExists(QString path) {
+    QFileInfo check_file(path);
+    if (check_file.exists() && check_file.isFile() && QDir("pdf").exists()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void Application::setAMenuOfDocumentation() {
     music->stopMusic();
     music->addFourthMusic();
     music->startMusic();
+
+    if(pdfFileExists(":/pdf/Liczby pierwsze.pdf")) {
+        info->hide();
+        QFile HelpFile("qrc:/pdf/Liczby pierwsze.pdf");
+        HelpFile.copy(qApp->applicationDirPath().append("/pdf/Liczby pierwsze.pdf"));
+        QDesktopServices::openUrl(QUrl::fromLocalFile
+                                  (qApp->applicationDirPath().append("/pdf/Liczby pierwsze.pdf")));
+    } else {
+        info->show();
+        info->setText("Brak pliku z dokumentacją!");
+        info->move(QPoint(270, 500));
+        info->setFixedSize(450, 30);
+        info->setStyleSheet("color: #ff0000; font-size: 20px; font-weight: bold;");
+    }
 }
 
 void Application::detectAClickOfTestOfPrime() {
@@ -193,15 +219,12 @@ void Application::detectAClickOfTestOfPrime() {
 
 void Application::detectAClickOfSieve() {
     //to be continued - in preparation
-    buttonsInMainMenu[1]->setText("Tylko muzyka dodana!");
-    buttonsInMainMenu[2]->setText("Pomoc i dokumentacja");
     setAMenuOfSieve();
 }
 
 void Application::detectAClickOfDocumentation() {
     //to be continued - in preparation
     buttonsInMainMenu[1]->setText("Sito Eratostenesa");
-    buttonsInMainMenu[2]->setText("Tylko muzyka dodana!");
     setAMenuOfDocumentation();
 }
 

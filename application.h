@@ -3,19 +3,28 @@
 
 #include <QMainWindow>
 #include <QApplication>
+#include <QDesktopServices>
 #include <QMessageBox>
 #include <QCloseEvent>
-#include <QAbstractButton>
+
 #include <QDesktopWidget>
 #include <QWidget>
+
 #include <QLabel>
+#include <QPixmap>
 #include <QPushButton>
+#include <QAbstractButton>
+
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+
 #include <QLineEdit>
 #include <QValidator>
 #include <QIntValidator>
-#include <QPixmap>
+
+#include <QUrl>
+#include <QFileInfo>
+#include <QDir>
 
 #include "music.h"
 #include "prime.h"
@@ -27,7 +36,6 @@ private:
     int height;
 
     QDesktopWidget *desktop;
-
     QWidget *widget;
     QWidget *widgetTestOfPrime;
     //QWidget *widgetSieve;
@@ -45,6 +53,7 @@ private:
     QLabel *label2;
     QLabel *me;
     QLabel *yesOrNo;
+    QLabel *info;
     QLineEdit *lineEdit;
 
     QPushButton *buttonsInMainMenu[3];
@@ -66,6 +75,7 @@ private slots:
     void setAMenuOfPrime();
     void setAMenuOfSieve();
     void setAMenuOfDocumentation();
+    bool pdfFileExists(QString path);
 
 public:
     Application(QWidget *parent = 0);
