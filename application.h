@@ -46,7 +46,6 @@ private:
 
     QVBoxLayout *verticals[3];
     QHBoxLayout *horizontals[3];
-
     QHBoxLayout *horizontalsObjects[7];
 
     QLabel *label;

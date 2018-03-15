@@ -3,20 +3,20 @@
 
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
+#include <QtGlobal>
 
 class Music {
 private:
+    int test;
+
     QMediaPlayer *player;
-    QMediaPlaylist *playlists[4];
+    QMediaPlaylist *playlist;
 public:
     Music();
     ~Music();
 
-    void addFirstMusic();
-    void addSecondMusic();
-    void addThirdMusic();
-    void addFourthMusic();
     void startMusic();
+    void addMusic();
     void stopMusic();
 };
 

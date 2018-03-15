@@ -8,6 +8,11 @@ Application::Application(QWidget *parent)
     music = new Music();
     prime = new Prime();
 
+    for(unsigned int i=0; i<3; i++) {
+        verticals[i] = nullptr;
+        horizontals[i] = nullptr;
+    }
+
     setPropertiesOfApplication();
     setLayoutsOfMainMenu();
 }
@@ -30,12 +35,7 @@ void Application::moveEvent(QMoveEvent *event) {
 }
 
 void Application::setLayoutsOfMainMenu() {
-    for(unsigned int i=0; i<3; i++) {
-        verticals[i] = nullptr;
-        horizontals[i] = nullptr;
-    }
-
-    music->addFirstMusic();
+    music->addMusic();
     music->startMusic();
 
     label = new QLabel(this);
@@ -139,7 +139,7 @@ void Application::addLayoutsInTestOfPrime() {
 
 void Application::setAMenuOfPrime() {
     music->stopMusic();
-    music->addSecondMusic();
+    music->addMusic();
     music->startMusic();
 
     label->setText("Podaj liczbę: ");
@@ -174,7 +174,7 @@ void Application::setAMenuOfPrime() {
 
 void Application::setAMenuOfSieve() {
     music->stopMusic();
-    music->addThirdMusic();
+    music->addMusic();
     music->startMusic();
 
     for(unsigned int i=0; i<3; i++) {
@@ -217,7 +217,7 @@ bool Application::pdfFileExists(QString path) {
 
 void Application::setAMenuOfDocumentation() {
     music->stopMusic();
-    music->addFourthMusic();
+    music->addMusic();
     music->startMusic();
 
     if(pdfFileExists(":/pdf/Liczby pierwsze.pdf")) {
