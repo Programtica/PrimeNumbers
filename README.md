@@ -1,3 +1,3 @@
-# Prime-Numbers-QT-GUI
+# Prime Numbers
 
 In preparation.
