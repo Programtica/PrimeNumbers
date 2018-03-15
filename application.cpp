@@ -7,6 +7,7 @@ Application::Application(QWidget *parent)
 
     music = new Music();
     prime = new Prime();
+
     setPropertiesOfApplication();
     setLayoutsOfMainMenu();
 }
@@ -17,10 +18,9 @@ void Application::setPropertiesOfApplication() {
     setFixedSize(width, height);
     desktop = QApplication::desktop();
 
-    int screenWidth = desktop->width();
-    int screenHeight = desktop->height();
+    screenWidth = desktop->width();
+    screenHeight = desktop->height();
 
-    move((screenWidth - width) / 2, (screenHeight - height) / 2);
     setStyleSheet("QMainWindow{ background-image: url(:/img/paper.jpg)}");
 }
 
@@ -251,6 +251,12 @@ void Application::detectAClickOfTestOfPrime() {
     }
 
     returnToMenu->hide();
+}
+
+void Application::moveEvent(QMoveEvent *event)
+{
+  if (QPoint((screenWidth - width) / 2, (screenHeight - height) / 2) != event->pos())
+    move(QPoint((screenWidth - width) / 2, (screenHeight - height) / 2));
 }
 
 void Application::detectAClickOfSieve() {

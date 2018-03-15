@@ -9,9 +9,7 @@ void Sieve::setSieve(int number) {
 
         if(number<=1) {
             //cout << "Oh, prime numbers can be greater than 1!" << endl;
-        }
-
-        else {
+        } else {
             for(int i=2; i<=number; i++)
                 check[i] = false;
 

@@ -35,6 +35,9 @@ private:
     int width;
     int height;
 
+    int screenWidth;
+    int screenHeight;
+
     QDesktopWidget *desktop;
     QWidget *widget;
     QWidget *widgetTestOfPrime;
@@ -78,6 +81,7 @@ private slots:
     void setAMenuOfSieve();
     void setAMenuOfDocumentation();
     bool pdfFileExists(QString path);
+    void moveEvent(QMoveEvent *event);
 
 public:
     Application(QWidget *parent = 0);
