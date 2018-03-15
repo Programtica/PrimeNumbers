@@ -13,15 +13,20 @@ Application::Application(QWidget *parent)
 }
 
 void Application::setPropertiesOfApplication() {
-    setWindowTitle("Liczby pierwsze");
-
-    setFixedSize(width, height);
     desktop = QApplication::desktop();
-
     screenWidth = desktop->width();
     screenHeight = desktop->height();
 
-    setStyleSheet("QMainWindow{ background-image: url(:/img/paper.jpg)}");
+    setFixedSize(width, height);
+    setWindowTitle("Liczby pierwsze");
+    setWindowIcon(QIcon(":/img/icon/favicon-0.png"));
+    setStyleSheet("QMainWindow{background-image: url(:/img/paper.jpg);}");
+}
+
+void Application::moveEvent(QMoveEvent *event) {
+  if (QPoint((screenWidth - width) / 2, (screenHeight - height) / 2) != event->pos()) {
+    move(QPoint((screenWidth - width) / 2, (screenHeight - height) / 2));
+  }
 }
 
 void Application::setLayoutsOfMainMenu() {
@@ -189,7 +194,7 @@ void Application::setAMenuOfSieve() {
 }
 
 void Application::setLayoutsInSieve() {
-    //nothing yet
+    //in preparation
     horizontals[2] = new QHBoxLayout();
     horizontals[2]->addStretch();
 
@@ -251,12 +256,6 @@ void Application::detectAClickOfTestOfPrime() {
     }
 
     returnToMenu->hide();
-}
-
-void Application::moveEvent(QMoveEvent *event)
-{
-  if (QPoint((screenWidth - width) / 2, (screenHeight - height) / 2) != event->pos())
-    move(QPoint((screenWidth - width) / 2, (screenHeight - height) / 2));
 }
 
 void Application::detectAClickOfSieve() {
