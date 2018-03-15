@@ -11,7 +11,6 @@ public:
     ~Prime();
 
     bool isPrime(int number);
-    void setAText();
 };
 
 #endif // PRIME_H

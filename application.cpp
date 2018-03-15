@@ -7,6 +7,7 @@ Application::Application(QWidget *parent)
 
     music = new Music();
     prime = new Prime();
+    setPropertiesOfApplication();
     setLayoutsOfMainMenu();
 }
 
@@ -24,6 +25,11 @@ void Application::setPropertiesOfApplication() {
 }
 
 void Application::setLayoutsOfMainMenu() {
+    for(unsigned int i=0; i<3; i++) {
+        verticals[i] = nullptr;
+        horizontals[i] = nullptr;
+    }
+
     music->addFirstMusic();
     music->startMusic();
 
@@ -33,7 +39,7 @@ void Application::setLayoutsOfMainMenu() {
     label->setAlignment(Qt::AlignCenter);
     label->setFixedSize(400, 50);
 
-    for(int i=0; i<3; i++) {
+    for(unsigned int i=0; i<3; i++) {
         buttonsInMainMenu[i] = new QPushButton(this);
         buttonsInMainMenu[i]->setCursor(Qt::PointingHandCursor);
         buttonsInMainMenu[i]->setStyleSheet("font-size: 20px;");
@@ -54,76 +60,76 @@ void Application::setLayoutsOfMainMenu() {
 void Application::addLayoutsOfMainMenu() {
     widget = new QWidget(this);
 
-    horizontal = new QHBoxLayout();
-    horizontal->addStretch();
+    horizontals[0] = new QHBoxLayout();
+    horizontals[0]->addStretch();
 
-    vertical = new QVBoxLayout();
-    vertical->addStretch();
-    vertical->addWidget(label);
-    vertical->addSpacing(40);
+    verticals[0] = new QVBoxLayout();
+    verticals[0]->addStretch();
+    verticals[0]->addWidget(label);
+    verticals[0]->addSpacing(40);
 
-    for(int i=0; i<3; i++) {
-        vertical->addWidget(buttonsInMainMenu[i]);
-        vertical->addSpacing(20);
+    for(unsigned int i=0; i<3; i++) {
+        verticals[0]->addWidget(buttonsInMainMenu[i]);
+        verticals[0]->addSpacing(20);
     }
 
-    vertical->addStretch();
+    verticals[0]->addStretch();
 
     info = new QLabel(this);
 
-    horizontal->addLayout(vertical);
-    horizontal->addStretch();
+    horizontals[0]->addLayout(verticals[0]);
+    horizontals[0]->addStretch();
 
-    widget->setLayout(horizontal);
+    widget->setLayout(horizontals[0]);
 
     setPropertiesOfApplication();
     setCentralWidget(widget);
 }
 
-void Application::addLayoutsInTestOfPrime() {
-    for(int i=0; i<7; i++) {
-        vertical2->addLayout(horizontalsObjects[i]);
-        vertical2->addStretch();
-
-        if(i==0) {
-            vertical2->addSpacing(10);
-        } else if(i==2) {
-            vertical2->addSpacing(-20);
-        }
-    }
-
-    horizontal2->addLayout(vertical2);
-    horizontal2->addStretch();
-    widgetTestOfPrime->setLayout(horizontal2);
-
-    setCentralWidget(widgetTestOfPrime);
-}
-
 void Application::setLayoutsInTestOfPrime() {
-    horizontal2 = new QHBoxLayout();
-    horizontal2->addStretch();
+    horizontals[1] = new QHBoxLayout();
+    horizontals[1]->addStretch();
 
-    vertical2 = new QVBoxLayout();
-    vertical2->addStretch();
+    verticals[1] = new QVBoxLayout();
+    verticals[1]->addStretch();
 
-    for(int i=0; i<7; i++) {
+    for(unsigned int i=0; i<7; i++) {
         horizontalsObjects[i] = new QHBoxLayout();
         horizontalsObjects[i]->addStretch();
     }
 
     horizontalsObjects[0]->addWidget(label);
-    horizontalsObjects[1]->addWidget(lineEdit);
+    horizontalsObjects[1]->addWidget(inputNumber);
     horizontalsObjects[2]->addWidget(label2);
     horizontalsObjects[3]->addWidget(me);
     horizontalsObjects[4]->addWidget(yesOrNo);
     horizontalsObjects[5]->addWidget(returnToMenu);
     horizontalsObjects[6]->addWidget(buttonToConfirm);
 
-    for(int i=0; i<7; i++) {
+    for(unsigned int i=0; i<7; i++) {
         horizontalsObjects[i]->addStretch();
     }
 
     addLayoutsInTestOfPrime();
+}
+
+void Application::addLayoutsInTestOfPrime() {
+    for(unsigned int i=0; i<7; i++) {
+        verticals[1]->addLayout(horizontalsObjects[i]);
+        verticals[1]->addStretch();
+
+        if(i==0) {
+            verticals[1]->addSpacing(10);
+        } else if(i==2) {
+            verticals[1]->addSpacing(-20);
+        }
+    }
+
+    horizontals[1]->addLayout(verticals[1]);
+    horizontals[1]->addStretch();
+    widgetTestOfPrime->setLayout(horizontals[1]);
+
+    setCentralWidget(widgetTestOfPrime);
 }
 
 void Application::setAMenuOfPrime() {
@@ -136,14 +142,14 @@ void Application::setAMenuOfPrime() {
     label->setAlignment(Qt::AlignCenter);
     label->adjustSize();
 
-    lineEdit = new QLineEdit(this);
-    lineEdit->setContextMenuPolicy(Qt::NoContextMenu);
-    lineEdit->setStyleSheet("border: 2px solid #0000ff; font-size: 40px;");
-    lineEdit->setAlignment(Qt::AlignCenter);
+    inputNumber = new QLineEdit(this);
+    inputNumber->setContextMenuPolicy(Qt::NoContextMenu);
+    inputNumber->setStyleSheet("border: 2px solid #0000ff; font-size: 40px;");
+    inputNumber->setAlignment(Qt::AlignCenter);
 
     validator = new QIntValidator(this);
-    lineEdit->setValidator(validator);
-    lineEdit->adjustSize();
+    inputNumber->setValidator(validator);
+    inputNumber->adjustSize();
 
     me = new QLabel(this);
     QPixmap pixmap(":/img/calculator.jpg");
@@ -156,6 +162,8 @@ void Application::setAMenuOfPrime() {
     buttonToConfirm->setStyleSheet("font-size: 25px;");
     buttonToConfirm->setFixedSize(400, 65);
 
+    info->hide();
+
     connect(buttonToConfirm, SIGNAL(pressed()), this, SLOT(setATextOfPrime()));
 }
 
@@ -163,6 +171,34 @@ void Application::setAMenuOfSieve() {
     music->stopMusic();
     music->addThirdMusic();
     music->startMusic();
+
+    for(unsigned int i=0; i<3; i++) {
+        buttonsInMainMenu[i]->hide();
+    }
+
+    label->setText("Podaj dolną liczbę: (w przygotowaniu)");
+    label->setStyleSheet("font-size: 20px;");
+
+    /*label3 = new QLabel(this);
+    label3->setText("Podaj górną liczbę");
+    label3->setStyleSheet("font-size: 40px;");
+    label3->setAlignment(Qt::AlignCenter);
+    label3->setFixedSize(400, 50);*/
+
+    info->hide();
+}
+
+void Application::setLayoutsInSieve() {
+    //nothing yet
+    horizontals[2] = new QHBoxLayout();
+    horizontals[2]->addStretch();
+
+    verticals[2] = new QVBoxLayout();
+    verticals[2]->addStretch();
+}
+
+void Application::addLayoutsInSieve() {
+    //nothing yet
 }
 
 bool Application::pdfFileExists(QString path) {
@@ -197,10 +233,10 @@ void Application::setAMenuOfDocumentation() {
 void Application::detectAClickOfTestOfPrime() {
     setAMenuOfPrime();
 
-    connect(lineEdit, SIGNAL(returnPressed()), this, SLOT(setATextOfPrime()));
+    connect(inputNumber, SIGNAL(returnPressed()), this, SLOT(setATextOfPrime()));
 
     label2 = new QLabel(this);
-    label2->setStyleSheet("font-size: 40px;");
+    label2->setStyleSheet("font-size: 36px;");
     label2->setAlignment(Qt::AlignCenter);
     label2->setFixedSize(600, 50);
 
@@ -233,7 +269,7 @@ void Application::setATextOfPrime() {
     me->hide();
 
     bool ok = true;
-    QString numberFromInput = lineEdit->text();
+    QString numberFromInput = inputNumber->text();
     int number = numberFromInput.toInt(&ok, 10);
     QString textOfNumber = QString::number(number);
 

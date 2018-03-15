@@ -41,20 +41,22 @@ private:
     //QWidget *widgetSieve;
     //QWidget *widgetDocumentation;
 
-    QVBoxLayout *vertical;
-    QVBoxLayout *vertical2;
-
-    QHBoxLayout *horizontal;
-    QHBoxLayout *horizontal2;
+    QVBoxLayout *verticals[3];
+    QHBoxLayout *horizontals[3];
 
     QHBoxLayout *horizontalsObjects[7];
 
     QLabel *label;
     QLabel *label2;
+    QLabel *label3;
+
     QLabel *me;
     QLabel *yesOrNo;
     QLabel *info;
-    QLineEdit *lineEdit;
+
+    QLineEdit *inputNumber;
+    QLineEdit *lowerInputNumber;
+    QLineEdit *upperInputNumber;
 
     QPushButton *buttonsInMainMenu[3];
     QPushButton *buttonToConfirm;
@@ -86,6 +88,8 @@ public:
     void setPropertiesOfApplication();
     void setLayoutsInTestOfPrime();
     void addLayoutsInTestOfPrime();
+    void setLayoutsInSieve();
+    void addLayoutsInSieve();
     void closeEvent(QCloseEvent *event);
 };
 

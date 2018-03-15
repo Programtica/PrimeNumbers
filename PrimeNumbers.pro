@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         application.cpp \
     music.cpp \
-    prime.cpp
+    prime.cpp \
+    sieve.cpp
 
 HEADERS += \
         application.h \
     music.h \
-    prime.h
+    prime.h \
+    sieve.h
 
 RESOURCES += \
     resources.qrc
