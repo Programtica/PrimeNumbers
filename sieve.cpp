@@ -14,7 +14,7 @@ void Sieve::setSieve(int number) {
                 check[i] = false;
 
             for(unsigned int i=2; i<=sqrt(number); i++) {
-                if(!check[i]) {
+                if(check[i] == false) {
                     for(int j=i*i; j<=number; j += i) {
                         check[j] = true;
                 }
@@ -23,7 +23,7 @@ void Sieve::setSieve(int number) {
             //cout << endl << "The prime numbers in this interval:" << endl;
 
             for(int i=2; i<=number; i++) {
-                if(!check[i]) {
+                if(check[i] == false) {
                     //qDebug() << "test";
                 }
             }
