@@ -38,3 +38,5 @@ HEADERS += \
 
 RESOURCES += \
     resources.qrc
+
+RC_FILE = icon.rc
