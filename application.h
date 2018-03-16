@@ -4,7 +4,12 @@
 #include <QMainWindow>
 #include <QApplication>
 #include <QDesktopServices>
+
+#include <QSystemSemaphore>
+#include <QSharedMemory>
 #include <QMessageBox>
+
+#include <QMoveEvent>
 #include <QCloseEvent>
 
 #include <QDesktopWidget>
@@ -28,15 +33,14 @@
 
 #include "music.h"
 #include "prime.h"
+#include "sieve.h"
 
 class Application : public QMainWindow {
     Q_OBJECT
-private:
-    int width;
-    int height;
-
-    int screenWidth;
-    int screenHeight;
+private:    
+    Music *music;
+    Prime *prime;
+    Sieve *sieve;
 
     QDesktopWidget *desktop;
     QWidget *widget;
@@ -50,7 +54,7 @@ private:
 
     QLabel *label;
     QLabel *label2;
-    QLabel *label3;
+    //QLabel *label3;
 
     QLabel *me;
     QLabel *yesOrNo;
@@ -60,14 +64,17 @@ private:
     QLineEdit *lowerInputNumber;
     QLineEdit *upperInputNumber;
 
+    QValidator *validator;
+
     QPushButton *buttonsInMainMenu[3];
     QPushButton *buttonToConfirm;
     QPushButton *returnToMenu;
 
-    Music *music;
-    Prime *prime;
+    int width;
+    int height;
 
-    QValidator *validator;
+    int screenWidth;
+    int screenHeight;
 
 private slots:
     void detectAClickOfTestOfPrime();

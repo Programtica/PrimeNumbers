@@ -1,8 +1,4 @@
 #include "application.h"
-#include <QApplication>
-#include <QSystemSemaphore>
-#include <QSharedMemory>
-#include <QMessageBox>
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
@@ -29,7 +25,7 @@ int main(int argc, char *argv[]) {
         QMessageBox informationMessage;
         informationMessage.setWindowTitle("Liczby pierwsze");
         informationMessage.setIcon(QMessageBox::Warning);
-        informationMessage.setText("Program już jest uruchomiony.\n\n"
+        informationMessage.setText("Program już jest uruchomiony.\n"
                        "Tylko może być uruchomiona jedna instancja programu.");
         informationMessage.exec();
         return 1;

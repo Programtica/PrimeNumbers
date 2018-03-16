@@ -7,6 +7,7 @@ Application::Application(QWidget *parent)
 
     music = new Music();
     prime = new Prime();
+    sieve = new Sieve();
 
     for(unsigned int i=0; i<3; i++) {
         verticals[i] = nullptr;
@@ -18,6 +19,11 @@ Application::Application(QWidget *parent)
 }
 
 void Application::setPropertiesOfApplication() {
+    music->stopMusic();
+    music->addMusic();
+    music->randInt(1,4);
+    music->startMusic();
+
     desktop = QApplication::desktop();
     screenWidth = desktop->width();
     screenHeight = desktop->height();
@@ -35,9 +41,6 @@ void Application::moveEvent(QMoveEvent *event) {
 }
 
 void Application::setLayoutsOfMainMenu() {
-    music->addMusic();
-    music->startMusic();
-
     label = new QLabel(this);
     label->setText("Liczby pierwsze");
     label->setStyleSheet("font-size: 40px;");
@@ -140,6 +143,7 @@ void Application::addLayoutsInTestOfPrime() {
 void Application::setAMenuOfPrime() {
     music->stopMusic();
     music->addMusic();
+    music->randInt(1,4);
     music->startMusic();
 
     label->setText("Podaj liczbę: ");
@@ -175,6 +179,7 @@ void Application::setAMenuOfPrime() {
 void Application::setAMenuOfSieve() {
     music->stopMusic();
     music->addMusic();
+    music->randInt(1,4);
     music->startMusic();
 
     for(unsigned int i=0; i<3; i++) {
@@ -218,6 +223,7 @@ bool Application::pdfFileExists(QString path) {
 void Application::setAMenuOfDocumentation() {
     music->stopMusic();
     music->addMusic();
+    music->randInt(1,4);
     music->startMusic();
 
     if(pdfFileExists(":/pdf/Liczby pierwsze.pdf")) {

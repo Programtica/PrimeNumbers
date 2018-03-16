@@ -4,13 +4,15 @@
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
 #include <QtGlobal>
+#include <QTime>
 
 class Music {
 private:
-    int test;
-
     QMediaPlayer *player;
     QMediaPlaylist *playlist;
+    QTime time;
+
+    int randomValue;
 public:
     Music();
     ~Music();
@@ -18,6 +20,7 @@ public:
     void startMusic();
     void addMusic();
     void stopMusic();
+    int randInt(int low, int high);
 };
 
 #endif // MUSIC_H
