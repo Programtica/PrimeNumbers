@@ -15,27 +15,33 @@ void Music::addMusic() {
     playlist = new QMediaPlaylist();
     randomValue = randInt(1,4);
 
-    if(randomValue == 1) {
-        playlist->addMedia(QUrl("qrc:/snd/ifIHadAChicken.mp3"));
-        playlist->addMedia(QUrl("qrc:/snd/amazingPlanSilentFilmDark.mp3"));
-        playlist->addMedia(QUrl("qrc:/snd/battyMcFaddinSilentFilmLight.mp3"));
-        playlist->addMedia(QUrl("qrc:/snd/brightlyFancyOddities.mp3"));
-    } else if(randomValue == 2) {
-        playlist->addMedia(QUrl("qrc:/snd/brightlyFancyOddities.mp3"));
-        playlist->addMedia(QUrl("qrc:/snd/battyMcFaddinSilentFilmLight.mp3"));
-        playlist->addMedia(QUrl("qrc:/snd/amazingPlanSilentFilmDark.mp3"));
-        playlist->addMedia(QUrl("qrc:/snd/ifIHadAChicken.mp3"));
-    } else if(randomValue == 3) {
-        playlist->addMedia(QUrl("qrc:/snd/battyMcFaddinSilentFilmLight.mp3"));
-        playlist->addMedia(QUrl("qrc:/snd/brightlyFancyOddities.mp3"));
-        playlist->addMedia(QUrl("qrc:/snd/ifIHadAChicken.mp3"));
-        playlist->addMedia(QUrl("qrc:/snd/amazingPlanSilentFilmDark.mp3"));
-    } else if(randomValue == 4) {
-        playlist->addMedia(QUrl("qrc:/snd/amazingPlanSilentFilmDark.mp3"));
-        playlist->addMedia(QUrl("qrc:/snd/ifIHadAChicken.mp3"));
-        playlist->addMedia(QUrl("qrc:/snd/brightlyFancyOddities.mp3"));
-        playlist->addMedia(QUrl("qrc:/snd/battyMcFaddinSilentFilmLight.mp3"));
+    switch(randomValue) {
+        case 1:
+            playlist->addMedia(QUrl("qrc:/snd/ifIHadAChicken.mp3"));
+            playlist->addMedia(QUrl("qrc:/snd/amazingPlanSilentFilmDark.mp3"));
+            playlist->addMedia(QUrl("qrc:/snd/battyMcFaddinSilentFilmLight.mp3"));
+            playlist->addMedia(QUrl("qrc:/snd/brightlyFancyOddities.mp3"));
+        break;
+        case 2:
+            playlist->addMedia(QUrl("qrc:/snd/brightlyFancyOddities.mp3"));
+            playlist->addMedia(QUrl("qrc:/snd/battyMcFaddinSilentFilmLight.mp3"));
+            playlist->addMedia(QUrl("qrc:/snd/amazingPlanSilentFilmDark.mp3"));
+            playlist->addMedia(QUrl("qrc:/snd/ifIHadAChicken.mp3"));
+        break;
+        case 3:
+            playlist->addMedia(QUrl("qrc:/snd/battyMcFaddinSilentFilmLight.mp3"));
+            playlist->addMedia(QUrl("qrc:/snd/brightlyFancyOddities.mp3"));
+            playlist->addMedia(QUrl("qrc:/snd/ifIHadAChicken.mp3"));
+            playlist->addMedia(QUrl("qrc:/snd/amazingPlanSilentFilmDark.mp3"));
+        break;
+        case 4:
+            playlist->addMedia(QUrl("qrc:/snd/amazingPlanSilentFilmDark.mp3"));
+            playlist->addMedia(QUrl("qrc:/snd/ifIHadAChicken.mp3"));
+            playlist->addMedia(QUrl("qrc:/snd/brightlyFancyOddities.mp3"));
+            playlist->addMedia(QUrl("qrc:/snd/battyMcFaddinSilentFilmLight.mp3"));
+        break;
     }
+
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
     player->setPlaylist(playlist);
 }
